@@ -1,5 +1,5 @@
 <%- include("../common/main-nav",{page:"cms-portfolio"}) %>
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
   <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
@@ -266,7 +266,7 @@
 
               {
                 data: 'portfolio_id', render: function (data, type, row, meta) {
-                  return '<button value="' + data + '" class="del btn btn-primary">Delete</button>';
+                  return '<button value="' + data + '" class="del btn btn-danger"><i style="cursor:pointer;" class="fa fa-trash" aria-hidden="true"></i></button>';
                 }
               }
             ]
