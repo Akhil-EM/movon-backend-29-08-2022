@@ -39,9 +39,9 @@
                             <!-- <th> Photos </th> -->
                             <!-- <th> Theme images </th> -->
                              <th> Date </th>
-                            <th>More Details</th>
+                            <th>Action</th>
                             
-                            <th>Delete</th>
+                            <!-- <th>Delete</th> -->
                           </tr>
                         </thead>
                         <tbody>
@@ -173,14 +173,16 @@
                               }
                             },
                             { data: 'enquiry_id',render: function (data, type,row, meta) {
-                                 return `<a class="btn" href="/enquires/${data}"><i class="fa fa-eye" aria-hidden="true"></i></a>`;
+                                 return `<a class="btn btn-success" href="/enquires/${data}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                 &nbsp&nbsp
+                                 <button id="delete-button" class="btn btn-danger" value="${data}"><i style="cursor:pointer;" class="fa fa-trash" aria-hidden="true"></i></button>`;
                               }
                             },
-                            { data: 'enquiry_id',render: function (data, type, row, meta) {
-                                return `<i style="cursor:pointer;color:red" id="delete-button" data-val="${data}" class="fa fa-trash" aria-hidden="true"></i>`;
-                              }
-                            }
-                        ]
+                            // { data: 'enquiry_id',render: function (data, type, row, meta) {
+                            //     return `<i style="cursor:pointer;color:red" id="delete-button" data-val="${data}" class="fa fa-trash" aria-hidden="true"></i>`;
+                            //   }
+                            // }
+                        ],
                     } );
                     //$('#myTable').DataTable();
                     // <button id="delete-button" class="btn btn-danger" value="${data}">Delete</button>
@@ -195,13 +197,14 @@
       });
      //delete enquiry
      $("body").on("click", "#delete-button", function(e){
-      console.log("delete button clicked")
+      // console.log("delete button clicked")
       var row = $(this);
       var table = $('#myTable').DataTable();
       var tablename = row.closest('table').DataTable();           
       let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
-      //var enquiry_id = jQuery(this).val();
-      var enquiry_id = jQuery(this).attr("data-val");
+      var enquiry_id = jQuery(this).val();
+      //var enquiry_id = jQuery(this).attr("data-val");
+      // console.log(enquiry_id);
       $.ajax({
                  method:"delete",
                  beforeSend: function(request) {
