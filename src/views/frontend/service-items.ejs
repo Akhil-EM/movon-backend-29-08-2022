@@ -354,38 +354,7 @@
           //  });
       });
 
-      // $("body").on("click", "#delete-button", function(e){
-      // var row = $(this);
-      // var table = $('#myTable').DataTable();
-      // var tablename = row.closest('table').DataTable();           
-      // let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
-      // var services_id = jQuery(this).val();
-      // $.ajax({
-      //            method:"delete",
-      //            beforeSend: function(request) {
-      //           request.setRequestHeader("Authorization", authorizationToken);
-      //           },
-      //            url: "/api/services/"+services_id, 
-      //            success: function(data, textStatus, jqXHR)
-      //            {
-      //             tablename.row( row.parents('tr') ).remove().draw();
-      //             successToast(data.message);
-      //            },
-      //            error: function(error)
-      //            {
-      //               errorToast(error.responseJSON.message);
-      //            }
-      //          });
-      // });
-
-      // $("#edit-button").click(function (e) { 
-      //   e.preventDefault();
-      //   console.log("button clicked");
-      //   var service_edid = jQuery(this).val();
-      //   window.localStorage.setItem("service_edid", service_edid);
-      //   window.location = "/frontend-management/services";
-      // });
-
+      
       function editData(id){
         window.localStorage.setItem("service_edid",id);
         window.location = "/frontend-management/services";
