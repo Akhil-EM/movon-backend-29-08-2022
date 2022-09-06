@@ -334,11 +334,11 @@
                               }
                             },
                             { data: 'service_id',render: function (data, type, row, meta) {
-                                return '<button value="'+data+'" class="btn btn-primary">Edit</button>';
+                                return `<button onclick="editData(${data})" value="'+data+'" class="btn btn-primary">Edit</button>`;
                               }
                             },
                             { data: 'service_id',render: function (data, type, row, meta) {
-                                return '<button value="'+data+'" class="btn btn-danger"><i style="cursor:pointer;" class="fa fa-trash" aria-hidden="true"></i></button>';
+                                return `<button onclick="deleteData(${data})" value="'+data+'" class="btn btn-danger"><i style="cursor:pointer;" class="fa fa-trash" aria-hidden="true"></i></button>`;
                               }
                             }
                         ]
@@ -354,34 +354,65 @@
           //  });
       });
 
-      $("body").on("click", ".del", function(e){
-      var row = $(this);
-      var table = $('#myTable').DataTable();
-      var tablename = row.closest('table').DataTable();           
-      let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
-      var services_id = jQuery(this).val();
-      $.ajax({
+      // $("body").on("click", "#delete-button", function(e){
+      // var row = $(this);
+      // var table = $('#myTable').DataTable();
+      // var tablename = row.closest('table').DataTable();           
+      // let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
+      // var services_id = jQuery(this).val();
+      // $.ajax({
+      //            method:"delete",
+      //            beforeSend: function(request) {
+      //           request.setRequestHeader("Authorization", authorizationToken);
+      //           },
+      //            url: "/api/services/"+services_id, 
+      //            success: function(data, textStatus, jqXHR)
+      //            {
+      //             tablename.row( row.parents('tr') ).remove().draw();
+      //             successToast(data.message);
+      //            },
+      //            error: function(error)
+      //            {
+      //               errorToast(error.responseJSON.message);
+      //            }
+      //          });
+      // });
+
+      // $("#edit-button").click(function (e) { 
+      //   e.preventDefault();
+      //   console.log("button clicked");
+      //   var service_edid = jQuery(this).val();
+      //   window.localStorage.setItem("service_edid", service_edid);
+      //   window.location = "/frontend-management/services";
+      // });
+
+      function editData(id){
+        window.localStorage.setItem("service_edid",id);
+        window.location = "/frontend-management/services";
+      }
+     
+      function deleteData(id){
+        let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
+        $.ajax({
                  method:"delete",
                  beforeSend: function(request) {
                 request.setRequestHeader("Authorization", authorizationToken);
                 },
-                 url: "/api/services/"+services_id, 
+                 url: "/api/services/"+id, 
                  success: function(data, textStatus, jqXHR)
                  {
-                  tablename.row( row.parents('tr') ).remove().draw();
+                  
                   successToast(data.message);
+                  setTimeout(()=>{
+                    window.location.reload();
+                  },1000)
                  },
                  error: function(error)
                  {
                     errorToast(error.responseJSON.message);
                  }
                });
-      });
-      $("body").on("click", ".edt", function(e){
-          var service_edid = jQuery(this).val();
-          window.localStorage.setItem("service_edid", service_edid);
-          window.location = "/frontend-management/services";
-      });
+      }
       
  </script>
     <!-- endinject -->
