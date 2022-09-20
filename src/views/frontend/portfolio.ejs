@@ -1,4 +1,65 @@
 <%- include("../common/main-nav-cms",{page:"cms-portfolio"}) %>
+
+  <style>
+ /**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: .5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #9880ff;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+}
+
+
+</style>
+
+
   <link href="../assets/css/custom.css" rel="stylesheet">
         <!-- partial -->
         
@@ -56,9 +117,14 @@
                           <div class="upload__img-wrap"></div>
                           </div>
                       </div>
-                     
                       <button id="submit-btn" type="button" class="btn btn-primary me-2">Submit</button>
-                      <div id="submit-btn-loader" type="button" class="btn btn-primary me-2">Loading...</div>
+                      <label id="submit-btn-loader" style="
+                        position: absolute;
+                        display: flex;
+                    ">Loading <div class="dot-flashing" style="
+                        margin-left: 20px;
+                    "></div></label>
+                      <!-- <div id="submit-btn-loader" type="button" class="btn btn-primary me-2">Loading...</div> -->
                       <!-- <button type="reset" class="btn btn-light">Cancel</button> -->
                     </form>
                   </div>
@@ -323,6 +389,7 @@
                                       
                                       $("#submit-btn-loader").hide();
                                       $("#submit-btn").show();
+                                      successToast('Uploaded Succefully');
                                       setTimeout(()=>{
                                         window.location.reload();
                                       },3000)
