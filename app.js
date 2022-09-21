@@ -10,6 +10,7 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const compressor = require("compression");
 const limitRequest = require("express-rate-limit");
+const response = require("./src/models/api/response.model");
 
 // view engine setup
 app.set('views', path.join(__dirname,"src",'views'));
@@ -34,6 +35,7 @@ app.use(limitRequest({
 //using compressor package to 
 //decrease payload size
 app.use(compressor());
+
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: path.join(__dirname, 'tmp'),
