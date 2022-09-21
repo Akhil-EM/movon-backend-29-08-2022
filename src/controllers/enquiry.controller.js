@@ -77,9 +77,9 @@ exports.addEnquiry = async (req,res)=>{
                                     size:image.size,
                                     image_type:"ENQUIRY"});
             //add portfolioImages
-            await EnquiryImage.create({
-                         image_id:imgRes.image_id,
-                         enquiry_id:enquiryResult.enquiry_id});
+        await EnquiryImage.create({
+            image_id:imgRes.image_id,
+            enquiry_id:enquiryResult.enquiry_id});
         }));
         
         

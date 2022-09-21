@@ -11,7 +11,8 @@ const {uploadFile,deleteFile} = require("../util/functions/aws-s3");
 const {db,sequelize} = require("../models/db");
 const AboutMe = db.aboutMe;
 const Image = db.images;
-let tempPath = path.join(__dirname,"../","../","tmp");
+let tempPath = path.join(__dirname, "../", "../", "tmp");
+
 exports.updateAboutMe = async (req,res)=>{
     
     try{

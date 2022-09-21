@@ -8,7 +8,8 @@ const appName = require("./src/config/app.config").program;
 const routes = require("./src/routes");
 const fileUpload = require("express-fileupload");
 const path = require("path");
-const { appendFile } = require("fs");
+const compressor = require("compression");
+const limitRequest = require("express-rate-limit");
 
 // view engine setup
 app.set('views', path.join(__dirname,"src",'views'));
@@ -20,6 +21,19 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use(moran('tiny')); //logs time of request and response
 app.use(express.static('public'));//share the public files
+//limiting concurrent request's 
+//to prevent DOS and DOSS attacks
+//maximum 10 request in 30 seconds
+app.use(limitRequest({
+    windowMs:1000 * 30,
+    max:10,
+    message:response("failed",429,false,"too many requests. try after sometime")
+}));
+
+
+//using compressor package to 
+//decrease payload size
+app.use(compressor());
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: path.join(__dirname, 'tmp'),
