@@ -168,6 +168,7 @@
           success: function (response) {
             let enquiry = response.data.enquiry;
             let imageHtml ="";
+            console.log(enquiry.enquiryImages);
             (enquiry.enquiryImages).forEach(image => {
                imageHtml+= `<div class="col-4 mb-2"><a href="${base_url}${image.image}" target="_blank"><img class="img-fluid" src="${base_url}${image.image}" alt="imag"></a></div>`
             });

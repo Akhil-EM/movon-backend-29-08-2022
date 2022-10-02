@@ -56,10 +56,7 @@ function  initializeApplicationRoutes(app){
     app.use("/api/about-me",require("./api-routes/about-me.route"));
    //always call use at the bottom 
    //error catching route
-    app.all("*",(req,res)=>
-        res.status(statusCodes.NOT_FOUND)
-           .json(responseModel("failed",
-                                "no API endpoint found.")));
+    app.all("*", (req, res) => res.render("error"));
 
     }
 

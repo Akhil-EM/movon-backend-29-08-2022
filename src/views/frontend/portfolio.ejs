@@ -1,63 +1,8 @@
 <%- include("../common/main-nav-cms",{page:"cms-portfolio"}) %>
+<script src="/assets/vendors/js/jquery.js"></script>
+<script src="/assets/js/toaster.js"></script>
 
-  <style>
- /**
- * ==============================================
- * Dot Flashing
- * ==============================================
- */
-.dot-flashing {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
-  animation: dotFlashing 1s infinite linear alternate;
-  animation-delay: .5s;
-}
-
-.dot-flashing::before, .dot-flashing::after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  top: 0;
-}
-
-.dot-flashing::before {
-  left: -15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
-  animation: dotFlashing 1s infinite alternate;
-  animation-delay: 0s;
-}
-
-.dot-flashing::after {
-  left: 15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
-  animation: dotFlashing 1s infinite alternate;
-  animation-delay: 1s;
-}
-
-@keyframes dotFlashing {
-  0% {
-    background-color: #9880ff;
-  }
-  50%,
-  100% {
-    background-color: #ebe6ff;
-  }
-}
-
-
-</style>
+  
 
 
   <link href="../assets/css/custom.css" rel="stylesheet">
@@ -118,13 +63,7 @@
                           </div>
                       </div>
                       <button id="submit-btn" type="button" class="btn btn-primary me-2">Submit</button>
-                      <label id="submit-btn-loader" style="
-                        position: absolute;
-                        display: flex;
-                    ">Loading <div class="dot-flashing" style="
-                        margin-left: 20px;
-                    "></div></label>
-                      <!-- <div id="submit-btn-loader" type="button" class="btn btn-primary me-2">Loading...</div> -->
+                      <div id="submit-btn-loader" type="button" class="btn btn-primary me-2">Loading...</div>
                       <!-- <button type="reset" class="btn btn-light">Cancel</button> -->
                     </form>
                   </div>
@@ -132,54 +71,7 @@
               </div>
             </div>
           </div>
-          <!-- portfolio - thumb -->
-<!-- 
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title">Multiple Portfolio Images</h3>
-              
-            </div>
-            <div class="row">
-              <div class="col-lg-12 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <p class="card-description">Add New Portfolio</p> -->
-                      <!-- <a href="/frontend-management/portfolios/view" type="button" class="btn btn-outline-info btn-icon-text btn-sm"> View<i class=" mdi mdi-eye  btn-icon-append"></i> -->
-                      <!-- </a>
-                    </div>
-                    <form method="post" class="forms-sample2" enctype="multipart/form-data">
-                      <div class="form-group">
-                        <label for="exampleInputName1">Select Portfolio</label>
-                        <select class="form-select" aria-label="Default select example" id="portfolio-id" name="portfolio-id">
-                          <option value="0" selected>Open this select menu</option>
-                        </select>
-                      </div>
-                     
-                      <div class="form-group">
-                          <div class="ashade-col col-8">
-                            <div class="upload__box">
-                            <div class="upload__btn-box">
-                              <label class="upload__btn">
-                              Upload Photo *
-                              <input type="file" multiple id="multiImages" name="multiImages"  accept="image/jpg,image/png,image/jpeg,image/gif"  data-max_length="20" class="upload__inputfile">
-                              </label>
-                            </div>
-                            <div class="upload__img-wrap"></div>
-                            </div>
-                      </div>
-
-                      </div>
-                      <button id="submit-btn-multi" type="submit" class="btn btn-primary me-2">Submit</button> -->
-                      <!-- <button type="reset" class="btn btn-light">Cancel</button> -->
-                    <!-- </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        
-          <!-- portfolio - thum -->
+       
           <footer class="footer">
             <div class="footer-inner-wraper">
               <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
@@ -205,36 +97,6 @@
     <script src="../../assets/js/axios.js"></script>
     <script>
       $("#submit-btn-loader").hide();
-//  $(document).ready(function () {
-  // getData();
-            //  function getData() {
-  
-            //  var base_url = window.location.origin+'/resources/images/portfolio/thumb/';    
-            //  let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
-            //  $.ajax({
-            //      method:"get",
-            //      beforeSend: function(request) {
-            //     request.setRequestHeader("Authorization", authorizationToken);
-            //     },
-            //      url: "/api/portfolios", 
-            //      success: function(data, textStatus, jqXHR)
-            //      {
-            //       document.getElementById("portfolio-id").innerHTML = '<option value="0" selected>Open this select menu</option>';
-            //       var options = "";
-            //       $.each( data.data.portfolios, function( key, value ) {
-            //         options += `<option value=${value.portfolio_id}>${value.title}</option>`;
-            //       });
-            //       document.getElementById("portfolio-id").innerHTML += options;
-            //      },
-            //      error: function(error)
-            //      {
-            //         errorToast(error.responseJSON);
-            //      }
-            //    });
-            //   }
-          //  });
-      // });
-
 
   jQuery(document).ready(function () {
     ImgUpload();
@@ -301,7 +163,7 @@
         });
          } else
       {
-        Swal.fire('',"please upload image under 5mb",'warning');
+        Swal.fire('',"please upload image under 5mb",'warning',"warning");
       }
       });
     });
@@ -331,11 +193,11 @@
         
         $("#submit-btn").click(async function (e) { 
           e.preventDefault();
-          $("#submit-btn-loader").show();
-          $("#submit-btn").hide();
           var fd = new FormData();
           var files = $('#img')[0].files;
            if(files.length > 0 ){
+            $("#submit-btn-loader").show();
+            $("#submit-btn").hide();
             fd.append('shortTitle',$('#portfolio-title').val());
             fd.append('title',$('#portfolio-short-title').val());
             fd.append('thumbImage',files[0]);
@@ -389,7 +251,8 @@
                                       
                                       $("#submit-btn-loader").hide();
                                       $("#submit-btn").show();
-                                      successToast('Uploaded Succefully');
+                                      
+                                      Swal.fire('',"Uploaded successfully","success");
                                       setTimeout(()=>{
                                         window.location.reload();
                                       },3000)
@@ -398,7 +261,8 @@
                                   }).catch(error=>{
                                     $("#submit-btn-loader").hide();
                                     $("#submit-btn").show();
-                                    errorToast(error);
+                                    
+                                    Swal.fire('',error.response.data.message,"error");
                                   })
                             
                           
@@ -406,7 +270,7 @@
                        }catch(error){
                           $("#submit-btn-loader").hide();
                           $("#submit-btn").show();
-                          errorToast(error);
+                          Swal.fire('',error,"error");
                        }
                       
                     
@@ -417,12 +281,14 @@
                  {
                   $("#submit-btn-loader").hide();
                   $("#submit-btn").show();
-                    errorToast(error.responseJSON.message);
+                    
+                    Swal.fire('',error.responseJSON.message,"error");
                  }
                });
 
               } else {
-                warningToast("upload image");
+                Swal.fire('',"choose a image ","error");
+                
               }
 
            });
@@ -456,10 +322,11 @@
                                           "content-type": "multipart/form-data"}
                                     });
                   
-                successToast(result.data.message);
+               
+                Swal.fire('',result.data.message,"success");
               }
             }catch(error){
-              errorToast(error);
+              Swal.fire('',error,"error");
 
             }
            

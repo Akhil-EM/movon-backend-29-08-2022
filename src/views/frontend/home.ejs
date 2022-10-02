@@ -84,18 +84,20 @@
 
     <script src="../../assets/js/file-upload.js"></script>
     <script>
+      
       $(document).ready(function () {
         $("#submit-btn-loader").hide();
         $("#submit-btn-mobile-loader").hide();
 
         $("#submit-btn").click(async function (e){ 
           e.preventDefault();
-          $("#submit-btn-loader").show();
-          $("#submit-btn").hide();
           var fd = new FormData();
           var files = $('#img')[0].files;
            if(files.length > 0 ){
+            $("#submit-btn-loader").show();
+            $("#submit-btn").hide();
            fd.append('image',files[0]);
+            
              let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
              $.ajax({
                  method:"post",
@@ -114,7 +116,8 @@
                     $('.file-upload-info').val("");
                     $("#submit-btn-loader").hide();
                     $("#submit-btn").show();
-                    successToast(data.message);
+                    // successToast(data.message);
+                    Swal.fire('',data.message,'success');
                     
                    } 
                  },
@@ -122,23 +125,26 @@
                  {
                     $("#submit-btn-loader").hide();
                     $("#submit-btn").show();
-                    errorToast(error.responseJSON.message);
+                    
+                    Swal.fire('',error.responseJSON.message,'error');
                  }
                });
 
               } else {
-                alert("upload image");
+                
+                return Swal.fire('',"Choose a image to continue.",'warning');
               }
 
            });
 
       $("#submit-btn-mobile").click(async function (e) { 
           e.preventDefault();
-          $("#submit-btn-mobile-loader").show();
-          $("#submit-btn-mobile").hide();
+          
           var fd = new FormData();
           var files = $('#img-mobile')[0].files;
            if(files.length > 0 ){
+            $("#submit-btn-mobile-loader").show();
+            $("#submit-btn-mobile").hide(); 
            fd.append('image',files[0]);
              let authorizationToken = "Bearer "+ window.localStorage.getItem("token");
              $.ajax({
@@ -158,21 +164,21 @@
                     $('.file-upload-info-mobile').val("");
                     $("#submit-btn-mobile-loader").hide();
                     $("#submit-btn-mobile").show();
-                    successToast(data.message);
-                    
+                    Swal.fire('',data.message,'success');
                    } 
                  },
                  error: function(error)
                  {
                     $("#submit-btn-mobile-loader").hide();
                     $("#submit-btn-mobile").show();
-                    errorToast(error.responseJSON.message);
-
+                    
+                    Swal.fire('',error.responseJSON.message,'error');
                  }
                });
 
               } else {
-                alert("upload image");
+                
+                Swal.fire('',"Choose a image to continue.",'warning');
               }
 
            });

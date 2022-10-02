@@ -54,10 +54,3 @@ routes.initializeApplicationRoutes(app);
 
 
 app.listen(port,()=>console.log(`\n${appName} is running on ${port}`));
-
-
-
-const {writeLog} = require("./src/util/functions/write-log");
-writeLog(__dirname,"dlkjkd")
-
-
