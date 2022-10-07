@@ -28,7 +28,7 @@ app.use(express.static('public'));//share the public files
 app.use(limitRequest({
     windowMs:1000 * 30,
     max:10,
-    message:response("failed",429,false,"too many requests. try after sometime")
+    message:response(false,"too many requests. try after sometime")
 }));
 
 
